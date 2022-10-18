@@ -1,0 +1,50 @@
+{
+    "manifest_version": 2,
+    "name": "DS-BCC",
+    "description": "Datenschutz-Erweiterung, die helfen soll, Datenpannen bei Rundmails zu vermeiden.",
+    "version": "1.0",
+    "author": "Lars Stintzing",
+    "applications": {
+        "gecko": {
+            "id": "l-rod@gmx.net",
+            "strict_min_version": "91.0"
+        }
+    },
+    "experiment_apis": {
+        "myapi": {
+            "schema": "schema.json",
+            "parent": {
+                "scopes": ["addon_parent"],
+                "paths": [["myapi"]],
+                "script": "implementation.js"
+            }
+        }
+    },
+    "permissions": [
+        "compose",
+        "storage",
+        "activeTab",
+        "tabs",
+        "addressBooks",
+        "notifications"
+    ],
+    "background": {
+        "scripts": [
+            "scripts/beforeSend.js",
+            "scripts/options.js"
+        ]
+    },
+    "icons": {
+        "64": "images/internet.png",
+        "32": "images/internet-32px.png",
+        "16": "images/internet-16px.png"
+    },
+    "browser_action": {
+        "default_title": "DS-BCC - Optionen",
+        "default_icon": "images/internet-32px.png"
+    },
+    "compose_action": {
+        "default_popup": "scripts/popup.html",
+        "default_title": "DS-BCC"
+    }
+}

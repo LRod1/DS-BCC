@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>DS-BCC - Optionen</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="options_menu.css">
+</head>
+<body>
+    <div id="headline">
+        <h1>Optionen</h1>
+    </div>
+    <div class="options">
+        <h2 id="options_head_general"></h2>
+        <!-- Buttons f&uuml;r Versand -->
+        <h3>Vertrauensw&uuml;rdige Domains</h3>
+        <input type="text" value="" id="trusted_domains">
+        <button id="trusted_domains_save">Speichern</button>
+        <label>
+            <br>
+            An dieser Stelle k&ouml;nnen vertrauenw&uuml;rdige Domains eingetragen werden (etwa die firmeneigene Domain). Dies hat Auswirkungen auf einige Warnungen.
+            Beispielsweise wird nicht vor Rundmails ohne BCC gewarnt.<br>
+            Bitte keine allgemein verf&uuml;gbaren Domains wie @gmail.de oder @gmx.de eintragen.<br>
+            Die Eintragung erfolgt nach dem Schema <b>@meinedomain1.de, @meinedomain2.de</b> , mehrere Eintragungen k&ouml;nnen per Komma getrennt werden.
+        </label>
+
+        <h2 id="options_head_send"></h2>
+        <!-- Buttons f&uuml;r Versand -->
+        <h3>Warnung vor Rundmails ohne Blindkopie</h3>
+        <label class="switch">
+            <input type="checkbox" id="bcc_check">
+            <span class="slider round"></span>
+        </label>
+        <label>
+            Rundmails, die nicht in Blindkopie verschickt werden, k&ouml;nnen eine Datenpanne nach DSGVO darstellen.
+            Dieses Modul warnt, wenn Mailempf&auml;nger mit unterschiedlichen Empf&auml;nger-Domains ohne Nutzung von BCC angeschrieben werden sollen.
+            Dafür muss eine vertrauenw&uuml;rdige Domain hinterlegt sein.<br>
+            Bei E-Mails mit einer Anzahl Empfänger über dem Rundmail-Schwellenwert (derzeit 4),
+            die mit genau einer Ausnahme an solche Domains gehen (z.B. 4x intern, 1x versehentlich extern) wird gewarnt.
+        </label>
+
+        <h3>Automatische Vervollst&auml;ndigung von Empf&auml;ngern</h3>
+        <label class="switch">
+            <input type="checkbox" id="auto_complete">
+            <span class="slider round"></span>
+        </label>
+        <label>
+            Durch die automatische Vervollst&auml;ndigung von Empf&auml;ngern aus dem Adressbuch k&ouml;nnen versehentlich falsche Empf&auml;nger angeschrieben werden.
+            Dieses Modul warnt, wenn eine interne Rundmail (anhand der eingestellten Domain) mit einem einzelnen externen Empf&auml;nger verschickt werden soll.
+        </label>
+
+        <h3>Hinweis bei vorhandenen PGP-Schl&uuml;sseln</h3>
+        <label class="switch">
+            <input type="checkbox" id="key_check">
+            <span class="slider round"></span>
+        </label>
+        <label>Gibt einen Hinweis, der an die Aktivierung der Verschl&uuml;sselung erinnert, wenn f&uuml;r alle Empf&auml;nger PGP-Schl&uuml;ssel vorhandenen sind.</label>
+
+        <h2 id="clear_local"></h2>
+        <h3>Lokale Daten des Addon löschen</h3>
+        <button id="stats_clear">L&ouml;schen</button>
+    </div>
+    <script src="options_menu.js"></script>
+</body>
+</html>
