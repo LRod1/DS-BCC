@@ -24,6 +24,7 @@ addEventListener("click", async (event) => {
 //Tab ID speichern, wird in bcc_check geladen
 let tid;
 let all_recp_bcc;
+loadLocalTxt();
 bcc_check();
 
 
@@ -54,7 +55,7 @@ async function bcc_check() {
             //Rundmail-Schwellenwert mit to/cc überschritten (>4) && externe Empfänger (nicht trusted) >= Schwellenwert (2)? Bei 1 siehe Warnung "auto_complete"
             if (to_and_cc_recp.length > BCC_LIMIT && ext_doms >= BCC_EXT_DOMS) {
                 if (prefs.hasOwnProperty("bcc_move_recp") && prefs.bcc_move_recp) {
-                    //Empfänger in BCC verschieben
+                    //TODO: Empfänger automatisch in BCC verschieben
                     let recp_length = to_and_cc_recp.length;
                     bcc_recp = allRecpToBcc(to_and_cc_recp, bcc_recp);
                     to_and_cc_recp = new Array();
@@ -68,7 +69,7 @@ async function bcc_check() {
                     send = true;
                     document.getElementById("choiceBCC").disabled = true;
                 } else {
-                    document.getElementById("warning_bcc").textContent = "Achtung: Der Schwellenwert fuer eine Rundmail wurde ueberschritten und die Anzahl externer Domains ist zu gross. Wenn es sich um eine Rundmail an externe Empfaenger handelt, kann dies zu einer Datenpanne nach DSGVO fuehren. Automatisches Verschieben in BCC ist in den Optionen moeglich.";
+                    document.getElementById("warning_bcc").textContent = browser.i18n.getMessage("popup_warning_bcc");
                     send = false;
                     all_recp_bcc = bcc_recp.concat(to_and_cc_recp);
                 }
@@ -84,7 +85,7 @@ async function bcc_check() {
                 //Warnen, wenn Rundmail-Größe (>4) mit nur einer externen Domain (bei 2+ siehe "bcc_check")
                 if (ext_doms + ext_bcc_doms == 1) {
                     console.log("test3");
-                    document.getElementById("warning_autocomplete").textContent = "Achtung: Es ist eine externe Domain in dieser Rundmail enthalten.";
+                    document.getElementById("warning_autocomplete").textContent = browser.i18n.getMessage("popup_warning_autocomplete");
                     send = false;
                 }
             }
@@ -107,7 +108,7 @@ async function bcc_check() {
                 console.log("Schlüssel vorhanden für " + emails + ": " + has_all_keys);
                 //Wenn alle Schlüssel vorhanden: Hinweis im Popup
                 if (has_all_keys) {
-                    document.getElementById("warning_keys").textContent = "Achtung: Fuer alle Empfaenger sind PGP-Schluessel vorhanden. Ist die Mail verschluesselt? Wenn kein OpenPGP-Symbol unten rechts im E-Mail-Fenster angezeigt wird, bitte abbrechen und die Verschluesselung unter 'Sicherheit' aktivieren!";
+                    document.getElementById("warning_keys").textContent = browser.i18n.getMessage("popup_warnung_pgp");
                     send = false;
                     //FEHLENDE INFO IN THUNDERBIRD API
                     //An dieser Stelle könnte bei Erweiterung der API auch der Verschluesselungs-Status der Mail abgefragt und die Warnung auf Mails ohne aktivierte Verschluesselung beschränkt werden
@@ -257,3 +258,13 @@ function getBCCRecp(details) {
     }
     return new_details;
 }*/
+
+
+//Lokale Texte laden
+function loadLocalTxt() {
+    head.textContent = browser.i18n.getMessage("popup_head");
+    send_quest.textContent = browser.i18n.getMessage("popup_send_quest");
+    choiceOK.textContent = browser.i18n.getMessage("popup_choiceOK");
+    choiceBCC.textContent = browser.i18n.getMessage("popup_choiceBCC");
+    choiceCancel.textContent = browser.i18n.getMessage("popup_choiceCancel");
+}

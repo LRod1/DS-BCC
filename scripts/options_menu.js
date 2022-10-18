@@ -6,6 +6,7 @@ auto_complete.addEventListener("click", savePrefs);
 key_check.addEventListener("click", savePrefs);
 stats_clear.addEventListener("click", clear);
 loadPrefs();
+loadLocalTxt();
 
 
 
@@ -79,7 +80,7 @@ function savePrefs() {
 function setButtonsToTrue() {
 	bcc_check.checked = true;
 	auto_complete.checked = true;
-	key_check.checked = true;
+	key_check.checked = false;
 }
 
 function setButtonsToPrefs(prefs) {
@@ -104,4 +105,21 @@ function checkTrustedDomains(val) {
 //Löscht Statistiken
 function clear() {
 	browser.storage.local.clear();
+}
+
+
+//i18n
+function loadLocalTxt() {
+	headline.textContent = browser.i18n.getMessage("options_title");
+	trusted_dom_hl.textContent = browser.i18n.getMessage("options_trusted_dom_hl");
+	trusted_domains_save.textContent = browser.i18n.getMessage("options_trusted_domains_save");
+	trusted_domains_descr.textContent = browser.i18n.getMessage("options_trusted_domains_descr");
+	bcc_head.textContent = browser.i18n.getMessage("options_bcc_head");
+	bcc_descr.textContent = browser.i18n.getMessage("options_bcc_descr");
+	autocompl_head.textContent = browser.i18n.getMessage("options_autocompl_head");
+	autocompl_descr.textContent = browser.i18n.getMessage("options_autocompl_descr");
+	pgp_head.textContent = browser.i18n.getMessage("options_pgp_head");
+	pgp_descr.textContent = browser.i18n.getMessage("options_pgp_descr");
+	clear_local.textContent = browser.i18n.getMessage("options_delete_head");
+	stats_clear.textContent = browser.i18n.getMessage("options_delete_button");
 }

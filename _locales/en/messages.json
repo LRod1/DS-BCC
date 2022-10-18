@@ -1,0 +1,81 @@
+{
+  "options_title": {
+    "message": "DS-BCC - Options"
+  },
+
+  "options_trusted_dom_hl": {
+    "message": "Trusted domains"
+  },
+
+  "options_trusted_domains_save": {
+    "message": "Save"
+  },
+
+  "options_trusted_domains_descr": {
+    "message": "Trusted domains can be entered at this point (such as the company's own domain). This has an effect on some warnings. For example, you will not be warned against circulars without BCC. Please do not enter general domains like @gmail.de or @gmx.de. The entry is done according to the scheme '@mydomain1.de, @mydomain2.de', multiple entries can be separated by comma."
+  },
+
+  "options_bcc_head": {
+    "message": "Warning against circular e-mails without blind copy"
+  },
+
+  "options_bcc_descr": {
+    "message": "Circular emails that are not sent in blind copy can be a data breach according to the GDPR. This module warns, if more than four mail recipients, which are not deposited at the trusted domains, are to be written to without using BCC."
+  },
+
+  "options_autocompl_head": {
+    "message": "Automatic completion of receivers"
+  },
+
+  "options_autocompl_descr": {
+    "message": "This module warns if a potentially receiver is entered. For this, a trusted domain must be stored. Emails with a number of recipients above the roundmail threshold (currently 4) that go to such domains with exactly one exception (e.g. 4x internal, 1x accidentally external) are will promt a warning."
+  },
+
+  "options_pgp_head": {
+    "message": "Remark for existing PGP keys"
+  },
+
+  "options_pgp_descr": {
+    "message": "Gives a remark reminding to enable encryption if PGP keys are present for all recipients."
+  },
+
+  "options_delete_head": {
+    "message": "Delete local data of this addon"
+  },
+
+  "options_delete_button": {
+    "message": "Delete"
+  },
+
+  "popup_head": {
+    "message": "DS-BCC-Warning"
+  },
+
+  "popup_warning_bcc": {
+    "message": "Attention: The threshold for a circular email has been exceeded and the number of external domains is too large. If it is a circular email to external recipients, this may lead to a data breach according to GDPR. Automatic moving to BCC is possible in the options."
+  },
+
+  "popup_warning_autocomplete": {
+    "message": "Attention: There is an external domain included in this circular."
+  },
+
+  "popup_warnung_pgp": {
+    "message": "Attention: PGP keys are available for all recipients. Is the mail encrypted? If no OpenPGP icon is displayed at the bottom right of the e-mail window, please cancel and activate encryption under 'Security'!"
+  },
+
+  "popup_send_quest": {
+    "message": "Send anyway?"
+  },
+
+  "popup_choiceOK": {
+    "message": "Send"
+  },
+
+  "popup_choiceBCC": {
+    "message": "Send with receivers in blind copy"
+  },
+
+  "popup_choiceCancel": {
+    "message": "Cancel"
+  }
+}

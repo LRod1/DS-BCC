@@ -1,0 +1,81 @@
+{
+  "options_title": {
+    "message": "DS-BCC - Optionen"
+  },
+
+  "options_trusted_dom_hl": {
+    "message": "Vertrauenwuerdige Domains"
+  },
+
+  "options_trusted_domains_save": {
+    "message": "Speichern"
+  },
+
+  "options_trusted_domains_descr": {
+    "message": "An dieser Stelle koennen vertrauenwuerdige Domains eingetragen werden (etwa die firmeneigene Domain). Dies hat Auswirkungen auf einige Warnungen. Beispielsweise wird nicht vor Rundmails ohne BCC gewarnt. Bitte keine allgemein verfuegbaren Domains wie @gmail.de oder @gmx.de eintragen. Die Eintragung erfolgt nach dem Schema '@meinedomain1.de, @meinedomain2.de', mehrere Eintragungen koennen per Komma getrennt werden."
+  },
+
+  "options_bcc_head": {
+    "message": "Warnung vor Rundmails ohne Blindkopie"
+  },
+
+  "options_bcc_descr": {
+    "message": "Rundmails, die nicht in Blindkopie verschickt werden, koennen eine Datenpanne nach DSGVO darstellen. Dieses Modul warnt, wenn mehr als vier Mailempfaenger, die nicht bei den vertrauenswuerdigen Domains hinterlegt sind, ohne Nutzung von BCC angeschrieben werden sollen."
+  },
+
+  "options_autocompl_head": {
+    "message": "Automatische Vervollstaendigung von Empfaengern"
+  },
+
+  "options_autocompl_descr": {
+    "message": "Dieses Modul warnt, wenn ein Empfaenger potentiell fehlerhaft ist. Dafuer muss eine vertrauenwuerdige Domain hinterlegt sein. Bei E-Mails mit einer Anzahl Empfaenger ueber dem Rundmail-Schwellenwert (derzeit 4), die mit genau einer Ausnahme an solche Domains gehen (z.B. 4x intern, 1x versehentlich extern) wird gewarnt."
+  },
+
+  "options_pgp_head": {
+    "message": "Hinweis bei vorhandenen PGP-Schluesseln"
+  },
+
+  "options_pgp_descr": {
+    "message": "Gibt einen Hinweis, der an die Aktivierung der Verschluesselung erinnert, wenn fuer alle Empfaenger PGP-Schluessel vorhandenen sind."
+  },
+
+  "options_delete_head": {
+    "message": "Lokale Daten des Addon loeschen"
+  },
+
+  "options_delete_button": {
+    "message": "Loeschen"
+  },
+
+  "popup_head": {
+    "message": "DS-BCC-Warnung"
+  },
+
+  "popup_warning_bcc": {
+    "message": "Achtung: Der Schwellenwert fuer eine Rundmail wurde ueberschritten und die Anzahl externer Domains ist zu gross. Wenn es sich um eine Rundmail an externe Empfaenger handelt, kann dies zu einer Datenpanne nach DSGVO fuehren."
+  },
+
+  "popup_warning_autocomplete": {
+    "message": "Achtung: Es ist eine externe Domain in dieser Rundmail enthalten."
+  },
+
+  "popup_warnung_pgp": {
+    "message": "Achtung: Fuer alle Empfaenger sind PGP-Schluessel vorhanden. Ist die Mail verschluesselt? Wenn kein OpenPGP-Symbol unten rechts im E-Mail-Fenster angezeigt wird, bitte abbrechen und die Verschluesselung unter 'Sicherheit' aktivieren!"
+  },
+
+  "popup_send_quest": {
+    "message": "Trotzdem senden?"
+  },
+
+  "popup_choiceOK": {
+    "message": "Senden"
+  },
+
+  "popup_choiceBCC": {
+    "message": "Mit Empfaengern in Blindkopie senden"
+  },
+
+  "popup_choiceCancel": {
+    "message": "Abbruch"
+  }
+}

@@ -43,8 +43,9 @@
         "default_title": "DS-BCC - Optionen",
         "default_icon": "images/internet-32px.png"
     },
-    "compose_action": {
-        "default_popup": "scripts/popup.html",
-        "default_title": "DS-BCC"
-    }
+  "compose_action": {
+    "default_popup": "scripts/popup.html",
+    "default_title": "DS-BCC"
+  },
+  "default_locale":  "en"
 }
