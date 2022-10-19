@@ -7,7 +7,8 @@
     "applications": {
         "gecko": {
             "id": "l-rod@gmx.net",
-            "strict_min_version": "91.0"
+            "strict_min_version": "91.0",
+            "strict_max_version": "107.0"
         }
     },
     "experiment_apis": {
