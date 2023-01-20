@@ -29,7 +29,7 @@ bcc_check();
 
 
 async function bcc_check() {
-    //Schwellenwert für Rundmail-Größe, später aus Menü?
+    //Default-Schwellenwert für Rundmail-Größe
     const BCC_LIMIT = 4;
     //Schwellenwert für externe Empfänger, später aus Menü?
     const BCC_EXT_DOMS = 2;
@@ -38,6 +38,10 @@ async function bcc_check() {
     .then(([details, prefs, addbooks]) => {
 
         console.log(prefs);
+
+        let bcc_limit;
+        if (prefs.hasOwnProperty("bcc_limit")) bcc_limit = prefs.bcc_limit;
+        else bcc_limit = BCC_LIMIT;
 
         let send = true;
         //Empfänger ermitteln, auflösen von Adresslisten
@@ -53,7 +57,7 @@ async function bcc_check() {
         //Soll auf Rundmails ohne BCC geprüft werden?
         if (!prefs.hasOwnProperty("bcc_check") || prefs.bcc_check) {
             //Rundmail-Schwellenwert mit to/cc überschritten (>4) && externe Empfänger (nicht trusted) >= Schwellenwert (2)? Bei 1 siehe Warnung "auto_complete"
-            if (to_and_cc_recp.length > BCC_LIMIT && ext_doms >= BCC_EXT_DOMS) {
+            if (to_and_cc_recp.length > bcc_limit && ext_doms >= BCC_EXT_DOMS) {
                 if (prefs.hasOwnProperty("bcc_move_recp") && prefs.bcc_move_recp) {
                     //TODO: Empfänger automatisch in BCC verschieben
                     let recp_length = to_and_cc_recp.length;
@@ -78,13 +82,10 @@ async function bcc_check() {
 
         //Soll auf einzelne externe Empfänger in internen Rundmails geprüft werden?
         if (!prefs.hasOwnProperty("auto_complete") || prefs.auto_complete) {
-            console.log("test1");
             //Rundmail-Größe erreicht (> 4)?
-            if (to_and_cc_recp.length + bcc_recp.length > BCC_LIMIT) {
-                console.log("test2");
+            if (to_and_cc_recp.length + bcc_recp.length > bcc_limit) {
                 //Warnen, wenn Rundmail-Größe (>4) mit nur einer externen Domain (bei 2+ siehe "bcc_check")
                 if (ext_doms + ext_bcc_doms == 1) {
-                    console.log("test3");
                     document.getElementById("warning_autocomplete").textContent = browser.i18n.getMessage("popup_warning_autocomplete");
                     send = false;
                 }

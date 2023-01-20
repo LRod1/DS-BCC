@@ -39,6 +39,14 @@
     "message": "Gives a remark reminding to enable encryption if PGP keys are present for all recipients."
   },
 
+  "options_limit_head": {
+    "message": "Threshold for BCC warning"
+  },
+
+  "options_limit_descr": {
+    "message": "Threshold value above which alerts are issued for circulars. The default value is 4, the value range is from 3 to 20."
+  },
+
   "options_delete_head": {
     "message": "Delete local data of this addon"
   },
