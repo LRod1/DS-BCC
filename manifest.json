@@ -2,23 +2,12 @@
     "manifest_version": 2,
     "name": "DS-BCC",
     "description": "__MSG_manDescr__",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "author": "Lars Stintzing",
     "applications": {
         "gecko": {
             "id": "l-rod@gmx.net",
-            "strict_min_version": "91.0",
-            "strict_max_version": "115.*"
-        }
-    },
-    "experiment_apis": {
-        "myapi": {
-            "schema": "schema.json",
-            "parent": {
-                "scopes": ["addon_parent"],
-                "paths": [["myapi"]],
-                "script": "implementation.js"
-            }
+            "strict_min_version": "91.0"
         }
     },
     "permissions": [
