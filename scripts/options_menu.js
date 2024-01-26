@@ -6,6 +6,7 @@ auto_complete.addEventListener("click", savePrefs);
 bcc_limit.addEventListener("click", savePrefs);
 stats_clear.addEventListener("click", clear);
 list_folders_button.addEventListener("click", listFolders);
+del_button.addEventListener("click", deleteMails);
 loadPrefs();
 loadLocalTxt();
 //listener, um Fehler beim Wechseln von Tabs zu vermeiden - listet ordner neu auf
@@ -26,6 +27,7 @@ const BCC_LIMIT = 4;
 const HGB_TIME = 6;
 let folders_list = new Array(); //für das Löschen alter Mails
 
+listFolders();
 
 async function getPref() {
 	return await browser.storage.local.get();
@@ -130,9 +132,10 @@ function clear() {
 //Ordner mit alten Mails auflisten
 async function listFolders() {
 	const listContainer = document.getElementById("list_container");
-	console.log(listContainer);
 	listContainer.innerHTML = "";
 	folders_list = new Array();
+	const cutoff = document.getElementById("list_cutoff");
+	cutoff.innerText = `${browser.i18n.getMessage("options_cut-off_date")}: ${getSixYearsAgo()}`;
 
 	//Accounts abrufen
 	let acc = await browser.accounts.list();
@@ -145,16 +148,6 @@ async function listFolders() {
 		//Mails in den einzelnen Ordnern prüfen und ggf. zu folders hinzufügen und mit Index pro Account und Ordner versehen
 		folders.forEach(async (item) => await checkFolder(listContainer, item));
 	});
-	addButton(listContainer);
-}
-
-//Löschen-Button für listFolders
-function addButton(listContainer) {
-	const listItem = document.createElement("div");
-	listItem.innerHTML = `<button type="button" id="del_button" />${browser.i18n.getMessage("options_delete_selected_button")}</button>`;
-	listItem.innerHTML += `<p>${browser.i18n.getMessage("options_cut-off_date")}: ${getSixYearsAgo()}</p>`
-	listContainer.appendChild(listItem);
-	del_button.addEventListener("click", deleteMails);
 }
 
 //rekursiv subfolder hinzufügen
@@ -177,7 +170,13 @@ async function checkFolder(listContainer, item) {
 	//AccountId + index als Bezeichner für Checkbox
 	let indexConcat = item["accountId"] + item["path"];
 	const listItem = document.createElement("div");
-	listItem.innerHTML = `<input type="checkbox" id="checkbox${indexConcat}" /> ${item.path} - ${i} ${browser.i18n.getMessage("options_messages")}`;
+	let e1 = document.createElement("div");
+	let e2 = document.createElement("div");
+	let e3 = document.createElement("div");
+	e1.innerText = indexConcat;
+	e2.innerText = item.path;
+	e3.innerText = i;
+	listItem.innerHTML = `<input type="checkbox" id="checkbox${e1.innerText}" /> ${e2.innerText} - ${e3.innerText} ${browser.i18n.getMessage("options_messages")}`;
 	listContainer.appendChild(listItem);
 	folders_list.push(new Object({ obj: item, in: indexConcat }));
 }
@@ -237,11 +236,11 @@ async function deleteMails() {
 			//false = papierkorb, true = vollständig löschen
 			let i = del.length;
 			await browser.messages.delete(del, false);
-			document.getElementById("list_status").innerHTML = browser.i18n.getMessage("options_moved_to_trash") + i + " " + browser.i18n.getMessage("options_messages");
+			document.getElementById("list_status").innerText = browser.i18n.getMessage("options_moved_to_trash") + i + " " + browser.i18n.getMessage("options_messages");
 			listFolders();
 		});
 	} catch (err) {
-		document.getElementById("list_status").innerHTML = err.message;
+		document.getElementById("list_status").innerText = err.message;
 		listFolders();
 	}
 }
@@ -280,4 +279,5 @@ function loadLocalTxt() {
 	stats_clear.textContent = browser.i18n.getMessage("options_delete_button");
 	list_folders.textContent = browser.i18n.getMessage("options_list_folders");
 	list_folders_button.textContent = browser.i18n.getMessage("options_list_folders_button");
+	del_button.textContent = browser.i18n.getMessage("options_delete_selected_button");
 }
