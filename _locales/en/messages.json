@@ -55,6 +55,30 @@
     "message": "Delete"
   },
 
+  "options_list_folders": {
+    "message": "List folders with old mails (> 6 years)"
+  },
+
+  "options_list_folders_button": {
+    "message": "List"
+  },
+
+  "options_messages":  {
+    "message": "messages"
+  },
+
+  "options_delete_selected_button":  {
+    "message": "Move selected mails to trash"
+  },
+
+  "options_cut-off_date":  {
+    "message": "cut-off date"
+  },
+
+  "options_moved_to_trash":  {
+    "message": "Moved to trash: "
+  },
+
   "popup_head": {
     "message": "DS-BCC-Warning"
   },

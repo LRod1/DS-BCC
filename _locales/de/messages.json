@@ -55,6 +55,30 @@
     "message": "Loeschen"
   },
 
+  "options_list_folders": {
+    "message": "Ordner mit alten Mails (> 6 Jahre) auflisten"
+  },
+
+  "options_list_folders_button": {
+    "message": "Auflisten"
+  },
+
+  "options_messages":  {
+    "message": "Nachrichten"
+  },
+
+  "options_delete_selected_button":  {
+    "message": "Ausgewählte Mails in den Papierkorb verschieben"
+  },
+
+  "options_cut-off_date":  {
+    "message": "Stichtag"
+  },
+
+  "options_moved_to_trash":  {
+    "message": "In den Papierkorb verschoben: "
+  },
+
   "popup_head": {
     "message": "DS-BCC-Warnung"
   },
