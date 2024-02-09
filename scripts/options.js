@@ -1,6 +1,6 @@
 "use strict";
 
-//Listener für onClicked (browserAction = Button in Menüleiste) zum Starten des Optionsmenüs
+//Listener fÃ¼r onClicked (browserAction = Button in MenÃ¼leiste) zum Starten des OptionsmenÃ¼s
 browser.browserAction.onClicked.addListener((tab, info) => {
     console.log(`Click`);
     let properties = {

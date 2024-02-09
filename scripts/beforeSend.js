@@ -1,6 +1,6 @@
 "use strict";
 
-//Variable zum Übergeben der Tab-Id
+//Variable zum Ãœbergeben der Tab-Id
 let tid = 0;
 //Speichert das Promise ab
 let promiseMap = new Map();
@@ -8,9 +8,9 @@ let promiseMap = new Map();
 browser.composeAction.disable();
 
 
-//Listener für Versenden der Mail
+//Listener fur Versenden der Mail
 browser.compose.onBeforeSend.addListener(tab => {
-    //Addon-Button beim Versenden aktiveren und Abfrage öffnen
+    //Addon-Button beim Versenden aktiveren und Abfrage Ã¶ffnen
     browser.composeAction.enable(tab.id);
     browser.composeAction.openPopup();
     //Promise erstellen und speichern
@@ -20,7 +20,7 @@ browser.compose.onBeforeSend.addListener(tab => {
 });
 
 
-//Listener für Empfang der Nachricht von popup.js
+//Listener fÃ¼r Empfang der Nachricht von popup.js
 browser.runtime.onMessage.addListener(message => {
     let resolve = promiseMap.get(message.tabId);
     //console.log(message);
@@ -29,7 +29,7 @@ browser.runtime.onMessage.addListener(message => {
     }
     //Addon-Button wieder deaktivieren
     browser.composeAction.disable(message.tabId);
-    //Abbruch des Versands, wenn Rückgabe des Promise aus compose.onBeforeSend.addListener mit cancel:true, sonst wird gesendet
+    //Abbruch des Versands, wenn RÃ¼ckgabe des Promise aus compose.onBeforeSend.addListener mit cancel:true, sonst wird gesendet
     if (message.send) {
         resolve();
     } else {

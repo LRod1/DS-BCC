@@ -38,7 +38,7 @@ async function loadPrefs() {
 		//2 von 3
 		getPref().then((prefs) => {
 			console.log(prefs);
-			//trusted_domains laden und als String f�r das Input-Feld aufbereiten
+			//trusted_domains laden und als String für das Input-Feld aufbereiten
 			if (prefs.hasOwnProperty("domain_list")) {
 				let domain_string = "";
 				prefs.domain_list.forEach(entry => {
@@ -109,7 +109,7 @@ function setButtonsToPrefs(prefs) {
 	else bcc_limit.value = BCC_LIMIT;
 }
 
-//Pr�ft die Liste der vertrauensw�rdigen Domains auf korrektes Format
+//Prüft die Liste der vertrauenswürdigen Domains auf korrektes Format
 function checkTrustedDomains(val) {
 	let domain_list = new Array();
 	let domains = val.replace(" ", "");
@@ -121,7 +121,7 @@ function checkTrustedDomains(val) {
 	return domain_list;
 }
 
-//L�scht Statistiken
+//Löscht Statistiken
 function clear() {
 	browser.storage.local.clear();
 	setButtonsToTrue();

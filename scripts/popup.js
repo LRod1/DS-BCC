@@ -1,12 +1,12 @@
 "use strict";
-//Popup beim Lesen von emfpangenen Mails - Aufruf �ber beforeSend.js
+//Popup beim Lesen von emfpangenen Mails - Aufruf über beforeSend.js
 
 
 //Wenn Warnung: Klick auswerten
 addEventListener("click", async (event) => {
     let send = false;
     if (event.target.id.startsWith("choice")) {
-        //Ok gew�hlt
+        //Ok gewählt
         if (event.target.id.startsWith("choiceOK")) {
             send = true;
         }
@@ -29,9 +29,9 @@ bcc_check();
 
 
 async function bcc_check() {
-    //Default-Schwellenwert f�r Rundmail-Gr��e
+    //Default-Schwellenwert für Rundmail-Größe
     const BCC_LIMIT = 4;
-    //Schwellenwert f�r externe Empf�nger, sp�ter aus Men�?
+    //Schwellenwert für externe Empfänger, später aus Menü?
     const BCC_EXT_DOMS = 2;
     //E-Mail-Details und Preferences laden
     Promise.all([loadComposeDetails(), loadPreferences(), returnAddressbook()])
@@ -44,22 +44,22 @@ async function bcc_check() {
         else bcc_limit = BCC_LIMIT;
 
         let send = true;
-        //Empf�nger ermitteln, aufl�sen von Adresslisten
+        //Empfänger ermitteln, auflösen von Adresslisten
         let to_recp = returnAddressArray(addbooks, details.to);
         let cc_recp = returnAddressArray(addbooks, details.cc);
         let bcc_recp = returnAddressArray(addbooks, details.bcc);
         let to_and_cc_recp = to_recp.concat(cc_recp);
 
-        //Variable zum z�hlen von Domains, die nicht im Optionsmen� als trusted domains gespeichert wurden
+        //Variable zum zählen von Domains, die nicht im Optionsmenü als trusted domains gespeichert wurden
         let ext_doms = returnExtDomains(to_and_cc_recp, prefs);
         let ext_bcc_doms = returnExtDomains(bcc_recp, prefs);
 
-        //Soll auf Rundmails ohne BCC gepr�ft werden?
+        //Soll auf Rundmails ohne BCC geprüft werden?
         if (!prefs.hasOwnProperty("bcc_check") || prefs.bcc_check) {
-            //Rundmail-Schwellenwert mit to/cc �berschritten (>4) && externe Empf�nger (nicht trusted) >= Schwellenwert (2)? Bei 1 siehe Warnung "auto_complete"
+            //Rundmail-Schwellenwert mit to/cc Überschritten (>4) && externe Empfänger (nicht trusted) >= Schwellenwert (2)? Bei 1 siehe Warnung "auto_complete"
             if (to_and_cc_recp.length > bcc_limit && ext_doms >= BCC_EXT_DOMS) {
                 if (prefs.hasOwnProperty("bcc_move_recp") && prefs.bcc_move_recp) {
-                    //TODO: Empf�nger automatisch in BCC verschieben
+                    //TODO: Empfänger automatisch in BCC verschieben
                     let recp_length = to_and_cc_recp.length;
                     bcc_recp = allRecpToBcc(to_and_cc_recp, bcc_recp);
                     to_and_cc_recp = new Array();
@@ -68,7 +68,7 @@ async function bcc_check() {
                     browser.notifications.create("moved to bcc", {
                         "type": "basic",
                         "title": "Sichere Rundmails-Addon",
-                        "message": "Empf�nger in Blindkopie bewegt: " + recp_length
+                        "message": "Empfänger in Blindkopie bewegt: " + recp_length
                     });
                     send = true;
                     document.getElementById("choiceBCC").disabled = true;
@@ -80,11 +80,11 @@ async function bcc_check() {
             } else document.getElementById("choiceBCC").remove();
         } else document.getElementById("choiceBCC").remove();
 
-        //Soll auf einzelne externe Empf�nger in internen Rundmails gepr�ft werden?
+        //Soll auf einzelne externe Empfänger in internen Rundmails geprüft werden?
         if (!prefs.hasOwnProperty("auto_complete") || prefs.auto_complete) {
-            //Rundmail-Gr��e erreicht (> 4)?
+            //Rundmail-Größe erreicht (> 4)?
             if (to_and_cc_recp.length + bcc_recp.length > bcc_limit) {
-                //Warnen, wenn Rundmail-Gr��e (>4) mit nur einer externen Domain (bei 2+ siehe "bcc_check")
+                //Warnen, wenn Rundmail-Größe (>4) mit nur einer externen Domain (bei 2+ siehe "bcc_check")
                 if (ext_doms + ext_bcc_doms == 1) {
                     document.getElementById("warning_autocomplete").textContent = browser.i18n.getMessage("popup_warning_autocomplete");
                     send = false;
@@ -92,19 +92,19 @@ async function bcc_check() {
             }
         }
 
-        //Ohne Umweg �ber Promise versenden, wenn sonst keine Warnungen
+        //Ohne Umweg über Promise versenden, wenn sonst keine Warnungen
         //Wenn send == true, wurde keine Warnung erzeugt -> sofort Nachricht versenden; sonst auf click-Event warten
         if (send) returnWarningResult(send);
     });
 }
 
 
-//Schlie�en des Warn-Popups und senden des Ergebnisses an beforeSend.js
+//Schließen des Warn-Popups und senden des Ergebnisses an beforeSend.js
 function returnWarningResult(send) {
     let tabId = tid;
-    //Nachricht zur�ck an beforeSend.js
+    //Nachricht zurück an beforeSend.js
     browser.runtime.sendMessage({ tabId, send });
-    //Nicht sofort schlie�en, da sonst Promise unfulfilled
+    //Nicht sofort schließen, da sonst Promise unfulfilled
     setTimeout(() => {
         window.close();
     }, 100);
@@ -140,7 +140,7 @@ function returnExtDomains(recp_list, prefs) {
         //Ist Domain in trusted domains?
         if (!prefs.hasOwnProperty("domain_list") || !prefs.domain_list.includes(recp_dom)) {
             //console.log("domain nicht in trusted: " + recp_dom);
-            //Z�hlen, wenn keine trusted domains gespeichert sind oder diese Domain nicht in der Liste ist
+            //Zählen, wenn keine trusted domains gespeichert sind oder diese Domain nicht in der Liste ist
             ext_doms++;
         }
         else console.log("domain in trusted: " + recp_dom);
@@ -155,7 +155,7 @@ function returnAddressbook() {
 }
 
 
-//Empf�nger-Array mit aufgel�sten Adressen aus Addresslisten zur�ckgeben
+//Empfänger-Array mit aufgelösten Adressen aus Addresslisten zurückgeben
 function returnAddressArray(addbooks, recp_array) {
     let addresses = new Array();
     recp_array.forEach(recp => {
@@ -171,7 +171,7 @@ function returnAddressArray(addbooks, recp_array) {
 }
 
 
-//Adressbuch aufl�sen
+//Adressbuch auflösen
 function returnAddresses(addbooks, list) {
     let listname = list.match(/<.*>/g)[0].replace("<","").replace(">","");
     let addresses = new Array();
