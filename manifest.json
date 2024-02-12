@@ -2,7 +2,7 @@
     "manifest_version": 2,
     "name": "DS-BCC",
     "description": "__MSG_manDescr__",
-    "version": "1.0.6",
+    "version": "1.0.7",
     "author": "Lars Stintzing",
     "applications": {
         "gecko": {
@@ -13,13 +13,12 @@
     "permissions": [
         "compose",
         "storage",
-        "activeTab",
-        "tabs",
         "notifications",
         "accountsFolders",
         "accountsRead",
         "messagesRead",
-        "messagesDelete"
+        "messagesDelete",
+        "addressBooks"
     ],
     "background": {
         "scripts": [
