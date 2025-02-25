@@ -9,10 +9,11 @@ browser.composeAction.disable();
 
 
 //Listener fur Versenden der Mail
-browser.compose.onBeforeSend.addListener(tab => {
+browser.compose.onBeforeSend.addListener(async tab => {
     //Addon-Button beim Versenden aktiveren und Abfrage öffnen
-    browser.composeAction.enable(tab.id);
+    await browser.composeAction.enable(tab.id);
     browser.composeAction.openPopup();
+    console.log("openpopup");
     //Promise erstellen und speichern
     return new Promise(resolve => {
         promiseMap.set(tab.id, resolve);
